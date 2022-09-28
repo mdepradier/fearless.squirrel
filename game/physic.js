@@ -7,11 +7,25 @@ function update()
     if (keyboard.pressed("left"))
         player1.turnLeft(rotateAngle);
     if (keyboard.pressed("right"))
-        player1.turnRight(rotateAngle);
+        player1.turnRight(-rotateAngle);
     if (keyboard.pressed("up"))
         player1.accelerate(moveDistance);
     if (keyboard.pressed("down"))
         player1.decelerate(moveDistance);
+
+    if (delay < 20) {
+        forward = !forward;
+        delay = 200;
+    }
+    if (forward){
+        enemy1.accelerate(moveDistance);
+    }
+    if (!forward){
+        enemy1.accelerate(-moveDistance);
+    }
+
+    delay -= 1;
+    enemy1.move();
 
     player1.move();
     controls.update();
